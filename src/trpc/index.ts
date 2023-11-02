@@ -18,7 +18,7 @@ export const appRouter = router({
             }
         })
 
-        if(!dbUser) {
+        if (!dbUser) {
             await db.user.create({
                 data: {
                     id: user.id,
@@ -27,12 +27,12 @@ export const appRouter = router({
             })
         }
 
-        return {success: true}
+        return { success: true }
     }),
 
-    getUserFiles: privateProcedure.query(async ({ctx}) => {
-        const {userId, user} = ctx
-        
+    getUserFiles: privateProcedure.query(async ({ ctx }) => {
+        const { userId, user } = ctx
+
         return await db.file.findMany({
             where: {
                 userId
@@ -40,8 +40,23 @@ export const appRouter = router({
         })
     }),
 
-    deleteFile: privateProcedure.input(z.object({id: z.string()})).mutation(async ({ctx, input}) => {
-        const {userId} = ctx
+    getFile: privateProcedure.input(z.object({ key: z.string() })).mutation(async ({ctx, input}) => {
+        const {userId} =ctx
+
+        const file = await db.file.findFirst({
+            where: {
+                key: input.key,
+                userId,
+            },
+        })
+
+        if(!file) throw new TRPCError({code : "NOT_FOUND"})
+
+        return file
+    }),
+
+    deleteFile: privateProcedure.input(z.object({ id: z.string() })).mutation(async ({ ctx, input }) => {
+        const { userId } = ctx
 
         const file = await db.file.findFirst({
             where: {
@@ -50,7 +65,7 @@ export const appRouter = router({
             }
         })
 
-        if(!file) throw new TRPCError({code: 'NOT_FOUND'})
+        if (!file) throw new TRPCError({ code: 'NOT_FOUND' })
 
         await db.file.delete({
             where: {
