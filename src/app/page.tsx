@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from 'lucide-react'
 import { buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
+import ShadcnUICards from "@/components/GitAndBmc";
 
 
 export default function Home() {
@@ -40,6 +41,7 @@ export default function Home() {
           Get started{' '}
           <ArrowRight className='ml-2 h-5 w-5' />
         </Link>
+        <ShadcnUICards/>
       </MaxWidthWrapper>
 
       {/* value proposition section */}
