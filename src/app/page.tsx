@@ -6,6 +6,7 @@ import Image from "next/image";
 import ShadcnUICards from "@/components/GitAndBmc";
 
 
+
 export default function Home() {
   return (
     <>
