@@ -62,6 +62,7 @@ const UploadDropzone = ({
   return (
     <Dropzone
       multiple={false}
+      noClick={true}
       onDrop={async (acceptedFile) => {
         setIsUploading(true)
 
@@ -95,8 +96,9 @@ const UploadDropzone = ({
 
         startPolling({ key })
       }}>
-      {({ getRootProps, getInputProps, acceptedFiles }) => (
+      {({ getRootProps, getInputProps, acceptedFiles, open }) => (
         <div
+          onClick={open}
           {...getRootProps()}
           className='border h-64 m-4 border-dashed border-gray-300 rounded-lg'>
           <div className='flex items-center justify-center h-full w-full'>
