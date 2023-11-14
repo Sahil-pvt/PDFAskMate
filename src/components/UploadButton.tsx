@@ -8,7 +8,7 @@ import {
 } from './ui/dialog'
 import { Button } from './ui/button'
 
-import Dropzone from 'react-dropzone'
+import Dropzone, { useDropzone } from 'react-dropzone'
 import { Cloud, File, Loader2 } from 'lucide-react'
 import { Progress } from './ui/progress'
 import { useUploadThing } from '@/lib/uploadthing'
@@ -59,6 +59,8 @@ const UploadDropzone = ({
     return interval
   }
 
+  const { open } = useDropzone()
+
   return (
     <Dropzone
       multiple={false}
@@ -96,7 +98,7 @@ const UploadDropzone = ({
 
         startPolling({ key })
       }}>
-      {({ getRootProps, getInputProps, acceptedFiles, open }) => (
+      {({ getRootProps, getInputProps, acceptedFiles }) => (
         <div
           onClick={open}
           {...getRootProps()}
