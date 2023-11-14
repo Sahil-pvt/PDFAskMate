@@ -59,12 +59,12 @@ const UploadDropzone = ({
     return interval
   }
 
-  const { open } = useDropzone({noClick: true})
+  const { open } = useDropzone()
 
   return (
     <Dropzone
       multiple={false}
-      // noClick={true}
+      noClick={true}
       onDrop={async (acceptedFile) => {
         setIsUploading(true)
 
